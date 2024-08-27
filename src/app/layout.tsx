@@ -21,7 +21,7 @@ export default function RootLayout({
       <html lang="en">
         <body className="flex flex-col min-h-screen bg-white">
           <Nav />
-          <div className="px-20">{children}</div>
+          <div className="px-20 bg-background text-black">{children}</div>
         </body>
       </html>
     </DataProvider>

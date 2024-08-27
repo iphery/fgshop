@@ -25,6 +25,8 @@ const config: Config = {
         warning: "#F97316", // Example warning color (orange-500)
         gray: "#f4f6f6",
         background: "#FFFFFF",
+        yellow: "#FFFF00",
+        blurgreen: "#eafaf1 ",
       },
     },
   },
