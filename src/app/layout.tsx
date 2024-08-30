@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <DataProvider>
       <html lang="en">
-        <body className="flex flex-col min-h-screen bg-white">
+        <body className="flex flex-col min-h-screen text-muted ">
           <Navbar />
           <div className="px-20 py-5">{children}</div>
         </body>

@@ -1,4 +1,66 @@
 "use client";
+import { API_PINEAPPLE } from "@/utils/constans";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+export default function Page() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submit1 = () => {
+    console.log("apadf");
+    console.log(email);
+    console.log(password);
+  };
+  const submit = async (e) => {
+    e.preventDefault();
+    const res = await fetch(`${API_PINEAPPLE}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+      credentials: "include",
+    });
+    const data = await res.json();
+    console.log(data);
+    if (data.success) {
+      console.log("Login successful, session ID:", data.sessionId);
+      router.push("/dashboard");
+    } else {
+      alert("Login failed");
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="email"
+        onInput={(val) => {
+          //console.log(val.target.value);
+          setEmail(val.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placehoder="password"
+        onInput={(val) => {
+          // console.log(val.target.value);
+          setPassword(val.target.value);
+        }}
+      />
+      <div
+        className="cursor-default hover:text-muted bg-primary mt-10"
+        onClick={submit}
+      >
+        Submit
+      </div>
+    </div>
+  );
+}
+
+/*
+"use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { DataProvider, useProvider } from "@/app/app-provider";
@@ -53,8 +115,8 @@ export default function Home() {
     setBegining1(isBegining1);
   }, []);
 
-  const fetchProducts = async () => {
-    /*
+  const fetchProducts1 = async () => {
+    
     try {
       const response = await fetch(
         `${API_PINEAPPLE}/products?page=${currentPageProduct}`
@@ -68,7 +130,7 @@ export default function Home() {
       console.error("Error fetching products:", error);
     } finally {
     }
-    */
+    
   };
 
   useEffect(() => {
@@ -112,7 +174,7 @@ export default function Home() {
           })}
         </Swiper>
 
-        {/* Prev Button */}
+       
         <div className=" absolute  left-10 group-hover:left-[-10px] transition-all  duration-500 ease-in-out  swiper-button-prev  cursor-pointer opacity-0 group-hover:opacity-100 ">
           <div className="w-20">
             <div className="bg-black justify center flex  p-1 cursor-pointer items-center  rounded-full  text-xl text-white hover:bg-primary hover:bg-opacity-20">
@@ -129,7 +191,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Next Button */}
+        
         <div className="absolute swiper-pagination text-black"></div>
         <style jsx global>{`
           .swiper-button-next::after,
@@ -145,3 +207,4 @@ export default function Home() {
     </div>
   );
 }
+*/

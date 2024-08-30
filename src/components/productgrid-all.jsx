@@ -7,9 +7,17 @@ import { useInView } from "@/hooks/inview";
 import { useProvider } from "@/app/app-provider";
 import { IoMdStar } from "react-icons/io";
 import { CiShop } from "react-icons/ci";
+import { useRouter } from "next/navigation";
+import { generateProductDesc } from "@/utils/productdesc";
 
-const ProductCard = ({ product }) => (
-  <div className=" rounded-lg shadow-md group">
+const ProductCard = ({ product, router }) => (
+  <div
+    className=" rounded-lg shadow-md group"
+    onClick={() => {
+      const desc = generateProductDesc(product.name);
+      router.push(`/p/iduser/${desc}`);
+    }}
+  >
     <img
       src={product.image}
       alt={product.name}
@@ -55,6 +63,7 @@ const ProductSkeleton = () => (
 );
 
 export const ProductGridAll = () => {
+  const router = useRouter();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -111,7 +120,7 @@ export const ProductGridAll = () => {
     <div className="space-y-6 mb-3 mt-20">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4 gap-y-8">
         {products.map((product, index) => (
-          <ProductCard key={index} product={product} />
+          <ProductCard key={index} product={product} router={router} />
         ))}
         {loading &&
           [...Array(7)].map((_, index) => (
