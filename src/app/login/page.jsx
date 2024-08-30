@@ -33,6 +33,7 @@ export default function Page() {
 
   return (
     <div>
+      <div>update</div>
       <input
         type="text"
         placeholder="email"
