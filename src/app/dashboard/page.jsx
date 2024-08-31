@@ -8,6 +8,7 @@ export default function Page() {
   const router = useRouter();
 
   const checkAuth = async () => {
+    console.log("Cookies before auth check:", document.cookie);
     const res = await fetch(`${API_PINEAPPLE}/protected`, {
       credentials: "include",
     });
