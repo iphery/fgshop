@@ -33,7 +33,7 @@ export default function Page() {
 
   return (
     <div>
-      <div>Update code</div>
+      <div>Update code saja</div>
       <input
         type="text"
         placeholder="email"
