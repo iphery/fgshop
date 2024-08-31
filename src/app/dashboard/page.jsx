@@ -16,12 +16,12 @@ export default function Page() {
       const data = await res.json();
       setUser(data.user);
     } else {
-      router.push("/login");
+      router.push("/");
     }
   };
 
   useEffect(() => {
-    checkAuth();
+    // checkAuth();
   }, []);
 
   if (!user) return <div>Loading...</div>;
