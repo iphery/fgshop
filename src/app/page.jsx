@@ -33,6 +33,7 @@ export default function Page() {
 
   return (
     <div>
+      <div className="mb-10">wow</div>
       <input
         type="text"
         placeholder="email"
