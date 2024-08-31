@@ -33,7 +33,7 @@ export default function Page() {
 
   return (
     <div>
-      <div>update</div>
+      <div>Update code</div>
       <input
         type="text"
         placeholder="email"

@@ -21,7 +21,7 @@ export default function Page() {
   };
 
   useEffect(() => {
-    // checkAuth();
+    checkAuth();
   }, []);
 
   if (!user) return <div>Loading...</div>;
