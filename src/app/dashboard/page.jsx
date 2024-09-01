@@ -12,6 +12,7 @@ export default function Page() {
     const res = await fetch(`${API_PINEAPPLE}/protected`, {
       credentials: "include",
     });
+    console.log(res);
     console.log("Cookies after request:", document.cookie);
     if (res.ok) {
       const data = await res.json();

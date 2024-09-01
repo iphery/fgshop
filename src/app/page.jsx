@@ -1,12 +1,55 @@
 "use client";
 import { API_PINEAPPLE } from "@/utils/constans";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+  /*
+  const checkAuth = async () => {
+    console.log("Cookies before auth check:", document.cookie);
+    const res = await fetch(`${API_PINEAPPLE}/protected`, {
+      credentials: "include",
+    });
+    //console.log(res);
+    //console.log("Cookies after request:", document.cookie);
+    if (res.ok) {
+      const data = await res.json();
+      console.log("ini ok");
+      console.log(data);
+      //setUser(data.user);
+      //setIsLogin(true);
+    } else {
+      console.log("ini tidak ok");
+      //setIsLogin(false);
+    }
+  };
+*/
+  useEffect(() => {
+    // submit();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(`${API_PINEAPPLE}/logout`, {
+        method: "POST",
+        credentials: "include", // Include cookies in the request
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log(data.message); // Should log "Logout successful."
+        // Redirect or handle the user being logged out
+        setIsLogin(false);
+      } else {
+        console.error("Logout failed:", data.message);
+      }
+    } catch (error) {
+      console.error("An error occurred during logout:", error);
+    }
+  };
 
   const submit1 = () => {
     console.log("apadf");
@@ -14,18 +57,18 @@ export default function Page() {
     console.log(password);
   };
   const submit = async (e) => {
-    e.preventDefault();
-    const res = await fetch(`${API_PINEAPPLE}/login`, {
-      method: "POST",
+    //e.preventDefault();
+    const res = await fetch(`${API_PINEAPPLE}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      //body: JSON.stringify({ email, password }),
       credentials: "include",
     });
     const data = await res.json();
     console.log(data);
     if (data.success) {
       console.log("Login successful, session ID:", data.sessionId);
-      router.push("/dashboard");
+      setIsLogin(false);
     } else {
       alert("Login failed");
     }
@@ -33,7 +76,21 @@ export default function Page() {
 
   return (
     <div>
-      <div className="mb-10">wow</div>
+      <div
+        className="mb-10"
+        onClick={async () => {
+          const response = await fetch(
+            `https://king.pineapple.farmaguru.id/foo`,
+            {
+              method: "GET",
+              credentials: "include", // Include cookies in the request
+            }
+          );
+          console.log("done");
+        }}
+      >
+        wow
+      </div>
       <input
         type="text"
         placeholder="email"
